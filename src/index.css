@@ -16,6 +16,10 @@
   color: white;
 }
 
+#display {
+  text-align: right;
+}
+
 #calculator {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

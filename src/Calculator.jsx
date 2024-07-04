@@ -3,7 +3,7 @@ import { useState } from "react";
 function App() {
   const [answer, setAnswer] = useState("0");
   const [expression, setExpression] = useState("");
-  const et = expression.trim();
+  const expressionT = expression.trim();
 
   const isOperator = function (symbol) {
     return /[*/+-]/.test(symbol);
@@ -14,7 +14,7 @@ function App() {
       setAnswer("");
       setExpression("0");
     } else if (isOperator(symbol)) {
-      setExpression(et + " " + symbol + " ");
+      setExpression(expressionT + " " + symbol + " ");
     } else if (symbol === "=") {
       calculate();
     } else if (symbol === "0") {
@@ -24,7 +24,6 @@ function App() {
     } else if (symbol === ".") {
       const lastNumber = expression.split(/[-+/*]/g).pop();
       if (!lastNumber) return;
-      console.log("lastNumber :>> ", lastNumber);
       if (lastNumber?.includes(".")) return;
       setExpression(expression + symbol);
     } else {
@@ -37,25 +36,25 @@ function App() {
   };
 
   const calculate = function () {
-    if (isOperator(et.charAt(et.length - 1))) return;
-    const parts = et.split(" ");
-    const newParts = [];
+    if (isOperator(expressionT.charAt(expressionT.length - 1))) return;
+    const bits = expressionT.split(" ");
+    const newBits = [];
 
-    for (let i = parts.length - 1; i >= 0; i--) {
-      if (["*", "/", "+"].includes(parts[i]) && isOperator(parts[i - 1])) {
-        newParts.unshift(parts[i]);
+    for (let i = bits.length - 1; i >= 0; i--) {
+      if (["*", "/", "+"].includes(bits[i]) && isOperator(bits[i - 1])) {
+        newBits.unshift(bits[i]);
         let j = 0;
         let k = i - 1;
-        while (isOperator(parts[k])) {
+        while (isOperator(bits[k])) {
           k--;
           j++;
         }
         i -= j;
       } else {
-        newParts.unshift(parts[i]);
+        newBits.unshift(bits[i]);
       }
     }
-    const newExpression = newParts.join(" ");
+    const newExpression = newBits.join(" ");
     if (isOperator(newExpression.charAt(0))) {
       setAnswer(eval(answer + newExpression).toString());
     } else {
@@ -69,7 +68,7 @@ function App() {
       <div className="container">
         <h1>Calculator</h1>
         <div id="calculator">
-          <div id="display" style={{ textAlign: "right" }}>
+          <div id="display">
             <div id="answer">{answer}</div>
             <div id="expression">{expression}</div>
           </div>
