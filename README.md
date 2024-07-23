@@ -24,7 +24,7 @@ Make sure you have Node.js and npm installed on your machine. You can download t
 ### Installation
 
 1. Clone the repository:
-    git clone https://github.com/Ob-Adams/Calculator.git
+    git clone https://github.com/OB-Adams/Calculator.git
 2. Navigate to the project directory:
     cd your-repo-name
 3. Install the dependencies:
